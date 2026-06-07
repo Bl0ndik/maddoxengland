@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <!-- Základní nastavení stránky a připojení CSS souboru. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <title>Maddox England</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- =====================
+       VYPNUTÍ OBRAZOVKY
+       ===================== -->
+  <!-- Černá obrazovka se zobrazí po kliknutí na Apple logo a slouží jako efekt vypnutí. -->
+  <div class="shutdown-screen hidden" id="shutdownScreen">
+    <div class="shutdown-text"><br>Maddox England</div>
+  </div>
+
+
+  <!-- =====================
+       HORNÍ LIŠTA
+       ===================== -->
+  <!-- Horní lišta napodobuje macOS a obsahuje logo, přepnutí motivu, datum a čas. -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="apple-btn" id="appleBtn" title="Zavřít portfolio">
+        <img class="apple-logo" src="img/apple-logo.png">
+      </button>
+    </div>
+
+    <div class="topbar-center">
+      <button class="topbar-btn" id="themeToggle" title="Přepnout motiv">
+        <span id="themeIcon">☾</span>
+      </button>
+
+      <span class="topbar-date" id="topbarDate"></span>
+    </div>
+
+    <div class="topbar-right">
+      <span id="topbarTime"></span>
+    </div>
+  </div>
+
+
+  <!-- =====================
+       MAIL
+       ===================== -->
+  <!-- Tohle je okno s jednoduchou zprávou o mně a tlačítkem pro otevření e-mailu. -->
+  <div class="mail-window hidden" id="mailWindow">
+    <div class="mail-header">
+      <div class="traffic-lights">
+        <span class="dot red" id="closeMail"></span>
+        <span class="dot yellow" id="minMail"></span>
+        <span class="dot green" id="maxMail"></span>
+      </div>
+
+      <div class="title">Nová zpráva</div>
+    </div>
+
+    <div class="mail-content">
+      <div class="mail-input"><strong>Komu:</strong> 25050mje@creativehill.cz</div>
+      <div class="mail-input"><strong>Předmět:</strong> O mně</div>
+
+      <div class="omne">
+        Dobrý den,<br><br>
+        jmenuji se Maddox England a pocházím z Prahy. Aktuálně jsem studentem prvního ročníku (1.C) oboru Vývojář na střední škole Creative Hill College.<br><br>
+        Maddox England
+      </div>
+
+      <a href="mailto:25050mje@creativehill.cz">
+        <button class="send-btn">Odeslat</button>
+      </a>
+    </div>
+  </div>
+
+
+  <!-- =====================
+       INSTAGRAM
+       ===================== -->
+  <!-- Instagram část má dvě stránky: hlavní feed a profil. Přepíná se mezi nimi přes spodní navigaci. -->
+  <div class="instagram-window hidden" id="InstagramWindow">
+    <div class="mail-header">
+      <div class="traffic-lights">
+        <span class="dot red" id="closeInsta"></span>
+        <span class="dot yellow" id="minInsta"></span>
+        <span class="dot green" id="maxInsta"></span>
+      </div>
+
+      <div class="title">Instagram</div>
+    </div>
+
+    <div class="page-wrap">
+
+      <!-- Hlavní stránka Instagramu se stories a příspěvky. -->
+      <div class="page active" id="page-home">
+        <div class="stories-wrap">
+          <div class="story-item">
+            <div class="story-ring"><img src="img/Me.jpeg"></div>
+            <div class="story-name">Já</div>
+          </div>
+
+          <div class="story-item">
+            <div class="story-ring"><img src="img/Mates.jpeg"></div>
+            <div class="story-name">Matyáš</div>
+          </div>
+
+          <div class="story-item">
+            <div class="story-ring"><img src="img/Tuan.jpeg"></div>
+            <div class="story-name">Tuan</div>
+          </div>
+
+          <div class="story-item">
+            <div class="story-ring"><div class="story-avatar" style="background:#d6ffd6"></div></div>
+            <div class="story-name">Theo</div>
+          </div>
+
+          <div class="story-item">
+            <div class="story-ring"><div class="story-avatar" style="background:#fff0d6"></div></div>
+            <div class="story-name">Standa</div>
+          </div>
+
+          <div style="width:6px;flex-shrink:0"></div>
+        </div>
+
+        <div class="feed">
+          <div class="post">
+            <div class="post-header">
+              <img src="img/Me.jpeg" class="post-avatar">
+              <div>
+                <div class="post-username">Maddox.England</div>
+                <div class="post-location">Lhota u Vsetína, Česká republika</div>
+              </div>
+            </div>
+            <img src="img/Kapka_Stake.jpeg" class="post-img">
+            <div class="post-caption"><strong>Maddox.England</strong> nejlepší stake #food #vsetín</div>
+          </div>
+
+          <div class="post">
+            <div class="post-header">
+              <img src="img/Me.jpeg" class="post-avatar">
+              <div>
+                <div class="post-username">Maddox.England</div>
+                <div class="post-location">Silnice</div>
+              </div>
+            </div>
+            <img src="img/Nissan.png" class="post-img">
+            <div class="post-caption"><strong>Maddox.England</strong> dream car #cars #jdm</div>
+          </div>
+
+          <div class="post">
+            <div class="post-header">
+              <img src="img/Me.jpeg" class="post-avatar">
+              <div>
+                <div class="post-username">Maddox.England</div>
+                <div class="post-location">Doma</div>
+              </div>
+            </div>
+            <img src="img/Manga.jpeg" class="post-img">
+            <div class="post-caption"><strong>Maddox.England</strong> právě čtu #manga #anime</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profilová stránka s bio, statistikami a mřížkou fotek. -->
+      <div class="page" id="page-profile">
+        <div class="profile-topbar">
+          <div class="profile-username">Maddox.England</div>
+        </div>
+
+        <div style="overflow-y:auto;flex:1;display:flex;flex-direction:column">
+          <div class="profile-header">
+            <div class="profile-top">
+              <img class="pfp" src="img/Me.jpeg">
+
+              <div class="profile-stats">
+                <div class="stat">
+                  <div class="stat-num">9</div>
+                  <div class="stat-label">příspěvků</div>
+                </div>
+
+                <div class="stat">
+                  <div class="stat-num">847</div>
+                  <div class="stat-label">sledujících</div>
+                </div>
+
+                <div class="stat">
+                  <div class="stat-num">312</div>
+                  <div class="stat-label">sleduji</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-name">Maddox England</div>
+            <div class="profile-bio">Skateboard · Gym · 3D tisk<br>Zlín · Creative Hill College 1.C</div>
+          </div>
+
+          <div class="grid">
+            <img src="img/Skate.png" class="grid-item" alt="Skateboard" title="Skateboard">
+            <img src="img/Music1.jpeg" class="grid-item" alt="Gym" title="Music">
+            <img src="img/3D1.jpeg" class="grid-item" alt="3D tisk" title="3D tisk">
+            <img src="img/Skate2.png" class="grid-item" alt="Skateboard 2" title="Skateboard 2">
+            <img src="img/Music2.jpeg" class="grid-item" alt="Gym 2" title="Music 2">
+            <img src="img/3D2.jpeg" class="grid-item" alt="3D tisk 2" title="3D tisk 2">
+            <img src="img/Skate3.png" class="grid-item" alt="Skateboard 3" title="Skateboard 3">
+            <img src="img/Music3.jpeg" class="grid-item" alt="Gym 3" title="Music 3">
+            <img src="img/3D3.jpeg" class="grid-item" alt="3D tisk 3" title="3D tisk 3">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spodní navigace Instagramu mezi feedem a profilem. -->
+    <div class="insta-dock">
+      <button id="nav-home-ig" class="insta-nav-btn active" title="Feed">
+        <img src="img/home_icon_black.png" class="home-ig-light" alt="Feed">
+        <img src="img/home_icon_white.png" class="home-ig-dark" alt="Feed">
+      </button>
+
+      <button id="nav-profile-ig" class="insta-nav-btn profile-nav-btn" title="Profil">
+        <img src="img/Me.jpeg" alt="Profil">
+      </button>
+    </div>
+  </div>
+
+
+  <!-- =====================
+       SPOTIFY
+       ===================== -->
+  <!-- Spotify okno je rozdělené na sidebar s interprety, seznam skladeb a spodní přehrávač. -->
+  <div class="spotify-window hidden" id="SpotifyWindow">
+    <div class="mail-header">
+      <div class="traffic-lights">
+        <span class="dot red" id="closeSpotify"></span>
+        <span class="dot yellow" id="minSpotify"></span>
+        <span class="dot green" id="maxSpotify"></span>
+      </div>
+      <div class="title">Spotify</div>
+    </div>
+
+    <div class="window-body">
+
+      <!-- Levý panel se seznamem oblíbených interpretů. -->
+      <div class="sidebar">
+        <div class="spotify-dock">
+          <a class="spotify-dock-icon active" id="spotifyHomeBtn" title="Domů">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="section-title">Oblíbení tvůrci</div>
+
+        <div class="artist-item" data-artist="Radiohead">
+          <img src="img/Radiohead.jpeg" class="artist-av">
+          <div class="artist-name">Radiohead</div>
+        </div>
+
+        <div class="artist-item" data-artist="Nirvana">
+          <img src="img/Nirvana.jpeg" class="artist-av">
+          <div class="artist-name">Nirvana</div>
+        </div>
+
+        <div class="artist-item" data-artist="Arctic Monkeys">
+          <img src="img/ArticMonkeys.jpeg" class="artist-av">
+          <div class="artist-name">Arctic Monkeys</div>
+        </div>
+
+        <div class="artist-item" data-artist="Empire of the Sun">
+          <img src="img/Empire of the sun.jpeg" class="artist-av">
+          <div class="artist-name">Empire of the Sun</div>
+        </div>
+
+        <div class="artist-item" data-artist="Joji">
+          <img src="img/Joji.jpeg" class="artist-av">
+          <div class="artist-name">Joji</div>
+        </div>
+
+        <div class="artist-item" data-artist="Bruno Mars">
+          <img src="img/Bruno Mars.jpeg" class="artist-av">
+          <div class="artist-name">Bruno Mars</div>
+        </div>
+        
+        <div class="artist-item" data-artist="Malcom Todd">
+          <img src="img/Malcom%20Todd.jpg" class="artist-av">
+          <div class="artist-name">Malcom Todd</div>
+        </div>
+      </div>
+
+      <!-- Hlavní část Spotify, kam JavaScript doplňuje seznam skladeb. -->
+      <div class="main-content">
+        <div class="main-inner">
+          <div class="page-title" id="pageTitle">Oblíbené písničky</div>
+          <div class="page-sub" id="pageSub">14 písní</div>
+
+          <div class="track-header">
+            <span>#</span>
+            <span>Název</span>
+            <span>Umělec</span>
+            <span class="th-right">
+              <svg style="width:14px;height:14px;fill:#535353;vertical-align:middle" viewBox="0 0 24 24">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-8.414V7a1 1 0 0 0-2 0v5a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586z"/>
+              </svg>
+            </span>
+          </div>
+
+          <div id="trackList"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Spodní přehrávač se současnou skladbou, tlačítky a progress barem. -->
+    <div class="player">
+      <div class="now-playing">
+        <div class="now-cover">
+          <img src="img/RadioheadC1.jpg" id="coverImg" alt="">
+        </div>
+
+        <div>
+          <div class="now-title" id="nowTitle">Creep</div>
+          <div class="now-artist" id="nowArtist">Radiohead</div>
+        </div>
+      </div>
+
+      <div class="player-controls">
+        <div class="ctrl-buttons">
+          <button class="ctrl-btn" id="prevTrackBtn" title="Předchozí">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/>
+            </svg>
+          </button>
+
+          <button class="youtube-btn" id="youtubeBtn">
+            YOUTUBE
+          </button>
+
+          <button class="ctrl-btn" id="nextTrackBtn" title="Další">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 18l8.5-6L6 6v12zm2-8.14L11.03 12 8 14.14V9.86zM16 6h2v12h-2z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="progress-wrap">
+          <span class="prog-time" id="progCurrent">0:00</span>
+
+          <div class="prog-bar" id="progBar">
+            <div class="prog-fill" id="progFill" style="width:0%"></div>
+          </div>
+
+          <span class="prog-time right" id="progTotal">3:58</span>
+        </div>
+      </div>
+
+      <div class="volume-wrap">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+        </svg>
+
+        <div class="vol-bar" id="volBar">
+          <div class="vol-fill" id="volFill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =====================
+       STEAM
+       ===================== -->
+  <!-- Steam část ukazuje oblíbené hry a samostatnou stránku profilu. -->
+  <div class="steam-window-st hidden" id="SteamWindow">
+    <div class="mail-header">
+      <div class="traffic-lights">
+        <span class="dot red" id="closeSteam"></span>
+        <span class="dot yellow" id="minSteam"></span>
+        <span class="dot green" id="maxSteam"></span>
+      </div>
+      <div class="title">Steam</div>
+    </div>
+
+    <!-- Přepínač mezi seznamem her a Steam profilem. -->
+    <div class="tabs-st">
+      <div class="tab-st active" id="tab-games" data-page="games">Oblíbené hry</div>
+      <div class="tab-st" id="tab-steam-profile" data-page="steam-profile">Profil</div>
+    </div>
+
+    <!-- Stránka s kartami oblíbených her a detailními informacemi. -->
+    <div class="page-st active" id="page-games">
+      <div class="games-page-st">
+        <div class="games-grid-st">
+          <div class="game-card-st active" id="gc-er" data-game="er">
+            <img src="img/EldenRing.png" class="game-cover-st" alt="Elden Ring">
+            <div class="game-title-st">Elden Ring</div>
+          </div>
+          <div class="game-card-st" id="gc-cs2" data-game="cs2">
+            <img src="img/CS2.png" class="game-cover-st" alt="Counter-Strike 2">
+            <div class="game-title-st">Counter-Strike 2</div>
+          </div>
+          <div class="game-card-st" id="gc-cp" data-game="cp">
+            <img src="img/Cyberpunk.png" class="game-cover-st" alt="Cyberpunk 2077">
+            <div class="game-title-st">Cyberpunk 2077</div>
+          </div>
+          <div class="game-card-st" id="gc-ter" data-game="ter">
+            <img src="img/Terraria.png" class="game-cover-st" alt="Terraria">
+            <div class="game-title-st">Terraria</div>
+          </div>
+          <div class="game-card-st" id="gc-hk" data-game="hk">
+            <img src="img/Hollow Night.png" class="game-cover-st" alt="Hollow Knight">
+            <div class="game-title-st">Hollow Knight</div>
+          </div>
+          <div class="game-card-st" id="gc-sky" data-game="sky">
+            <img src="img/Skyrim.png" class="game-cover-st" alt="Skyrim">
+            <div class="game-title-st">Skyrim</div>
+          </div>
+        </div>
+
+        <div class="game-info-st">
+          <div class="game-info-left-st">
+            <div class="game-info-name-st" id="gi-name">Elden Ring</div>
+            <div class="game-info-tags-st" id="gi-tags">
+              <span class="game-info-tag-st">RPG</span>
+              <span class="game-info-tag-st">Open World</span>
+              <span class="game-info-tag-st">Soulslike</span>
+            </div>
+          </div>
+          <div class="game-info-right-st">
+            <div class="game-stat-st">
+              <div class="game-stat-n-st" id="gi-hours">312</div>
+              <div class="game-stat-l-st">hodin</div>
+            </div>
+            <div class="game-stat-st">
+              <div class="game-stat-n-st" id="gi-ach">30/42</div>
+              <div class="game-stat-l-st">achievementů</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stránka se základními údaji ze Steam profilu. -->
+    <div class="page-st" id="page-steam-profile">
+      <div class="profile-page-st">
+        <div class="profile-card-st">
+          <img src="img/Steam-profile.png" class="profile-avatar-st" alt="Steam profil">
+          <div class="profile-info-st">
+            <div class="profile-display-name-st">Maddox England</div>
+            <div class="profile-country-st">Czech Republic</div>
+            <div class="profile-offline-st">
+              <div class="offline-dot-st"></div>
+              Offline · Getting cooked in klauzury 🔥🔥
+            </div>
+          </div>
+          <div class="profile-level-st">
+            <div style="font-size:14px;color:#ffffff;font-weight:600">Level</div>
+            <div class="level-circle-st">32</div>
+          </div>
+        </div>
+
+        <div class="profile-stats-row-st">
+          <div class="profile-stat-box-st">
+            <div class="psb-num-st">51</div>
+            <div class="psb-label-st">Her vlastněno</div>
+          </div>
+          <div class="profile-stat-box-st">
+            <div class="psb-num-st">4 366</div>
+            <div class="psb-label-st">Hodin celkem</div>
+          </div>
+          <div class="profile-stat-box-st">
+            <div class="psb-num-st">1734</div>
+            <div class="psb-label-st">Achievementů</div>
+          </div>
+          <div class="profile-stat-box-st">
+            <div class="psb-num-st">16</div>
+            <div class="psb-label-st">Přátel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================
+       FILES
+       ===================== -->
+  <!-- Files fungují jako jednoduchý prohlížeč projektů podle ročníků. -->
+    <div class="files-window-fl hidden" id="FilesWindow">
+ 
+      <!-- Horní část okna Files s tlačítky a cestou ke složce. -->
+      <div class="mail-header">
+        <div class="traffic-lights">
+          <span class="dot red" id="closeFiles"></span>
+          <span class="dot yellow" id="minFiles"></span>
+          <span class="dot green" id="maxFiles"></span>
+        </div>
+        <button class="back-btn-fl" id="filesBackBtn">&#8249;</button>
+        <div class="breadcrumb-fl" id="breadcrumb">
+          <span class="current">Projekty</span>
+        </div>
+      </div>
+    
+      <!-- Tělo okna Files je rozdělené na sidebar a hlavní obsah. -->
+      <div class="window-body-fl">
+    
+        <!-- Sidebar pro rychlé přepínání mezi ročníky. -->
+        <div class="sidebar-fl">
+          <div class="sidebar-title-fl">Projekty</div>
+    
+          <div class="sidebar-item-fl active" id="si-all" data-folder="all">
+            <svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/><path d="M3 11h18"/></svg>
+            Všechny
+          </div>
+          <div class="sidebar-item-fl" id="si-r1" data-folder="r1">
+            <svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+            1. ročník
+          </div>
+          <div class="sidebar-item-fl" id="si-r2" data-folder="r2">
+            <svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+            2. ročník
+          </div>
+          <div class="sidebar-item-fl" id="si-r3" data-folder="r3">
+            <svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+            3. ročník
+          </div>
+          <div class="sidebar-item-fl" id="si-r4" data-folder="r4">
+            <svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+            4. ročník
+          </div>
+        </div>
+    
+        <!-- Hlavní obsah, kde se zobrazují složky nebo projekty. -->
+        <div class="main-fl" id="main-fl">
+
+          <!-- Úvodní přehled složek pro jednotlivé ročníky. -->
+          <div class="view-folders-fl" id="view-home">
+            <div class="folder-card-fl" data-folder="r1">
+              <img src="img/Klauzury_inception.png" class="folder-header-fl">
+              <div class="folder-info-fl">
+                <div class="folder-name-fl">1. ročník</div>
+                <div class="folder-desc-fl">Projekty z prvního ročníku</div>
+                <div class="folder-meta-fl"><span>3 fotek</span><span>2025 – 2026</span></div>
+              </div>
+            </div>
+            <div class="folder-card-fl" data-folder="r2">
+              <div class="folder-header-fl">
+              </div>
+              <div class="folder-info-fl">
+                <div class="folder-name-fl">2. ročník</div>
+                <div class="folder-desc-fl">Projekty z druhého ročníku</div>
+                <div class="folder-meta-fl"><span>0 fotek</span><span>2026 – 2027</span></div>
+              </div>
+            </div>
+            <div class="folder-card-fl" data-folder="r3">
+              <div class="folder-header-fl">
+              </div>
+              <div class="folder-info-fl">
+                <div class="folder-name-fl">3. ročník</div>
+                <div class="folder-desc-fl">Projekty z třetího ročníku</div>
+                <div class="folder-meta-fl"><span>0 fotek</span><span>2027 – 2028</span></div>
+              </div>
+            </div>
+            <div class="folder-card-fl" data-folder="r4">
+              <div class="folder-header-fl">
+              </div>
+              <div class="folder-info-fl">
+                <div class="folder-name-fl">4. ročník</div>
+                <div class="folder-desc-fl">Projekty z čtvrtého ročníku</div>
+                <div class="folder-meta-fl"><span>0 fotek</span><span>2028 – 2029</span></div>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Projekty z prvního ročníku. -->
+          <div class="view-photos-fl hidden" id="view-r1">
+            <div class="photo-card-fl">
+              <img src="img/EldenRing_web.png" class="photo-img-fl">
+              <div class="photo-info-fl"><div class="photo-desc-fl">Webovka na oblibenou hru</div><div class="photo-date-fl">6. 12. 2025</div></div>
+            </div>
+            <div class="photo-card-fl">
+              <img src="img/Lego_Robot.jpeg" class="photo-img-fl">
+              <div class="photo-info-fl"><div class="photo-desc-fl">Rozdavac karet</div><div class="photo-date-fl">16. 2. 2026</div></div>
+            </div>
+            <div class="photo-card-fl">
+              <img src="img/Klauzury_inception.png" class="photo-img-fl">
+              <div class="photo-info-fl"><div class="photo-desc-fl">Klauzury</div><div class="photo-date-fl">7. 6. 2026</div></div>
+            </div>
+          </div>
+    
+          <!-- Zatím prázdná část pro druhý ročník. -->
+          <div class="dobra-otazka-fl hidden" id="view-r2">
+            <p>Pokud projdu tak příští rok tu budou další</p>
+          </div>
+    
+          <!-- Zatím prázdná část pro třetí ročník. -->
+          <div class="dobra-otazka-fl hidden" id="view-r3">
+            <p>Pokud projdu tak za 2 roky tu budou další</p>
+          </div>
+    
+          <!-- Zatím prázdná část pro čtvrtý ročník. -->
+          <div class="dobra-otazka-fl hidden" id="view-r4">
+            <p>Pokud projdu tak za 3 roky tu budou další</p>
+          </div>
+          </div>
+    
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- =====================
+       KOŠ ŠPATNÝCH NÁPADŮ
+       ===================== -->
+  <!-- Tohle je vtipná část portfolia, kde je schovaný jeden špatný nápad. -->
+  <div class="kos-window hidden" id="KosWindow">
+
+    <div class="mail-header">
+      <div class="traffic-lights">
+        <span class="dot red" id="closeKos"></span>
+        <span class="dot yellow" id="minKos"></span>
+        <span class="dot green" id="maxKos"></span>
+      </div>
+
+      <div class="title">Koš špatných nápadů</div>
+    </div>
+
+    <div class="kos-body">
+
+      <section class="kos-motto-section">
+        <div class="kos-motto-text">
+          <em>"Žádný nápad není špatný,<br>jen lepší nebo horší."</em>
+        </div>
+
+        <div class="kos-scroll-hint">
+          <svg viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+          <span>Kromě tohoto</span>
+        </div>
+      </section>
+
+      <section class="kos-klauzury-section">
+        <div class="kos-grid">
+
+          <div class="kos-klauzura-card">
+            <div class="kos-klauzura-img">
+              <img src="img/Spatny Napad.png" alt="Blbej nápad">
+            </div>
+
+            <div class="kos-klauzura-info">
+              <div class="kos-klauzura-name">Blbej nápad</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================
+       DOCK
+       ===================== -->
+  <!-- Spodní dock slouží jako hlavní menu pro otevírání jednotlivých aplikací. -->
+  <div class="dock">
+    <button class="dock-icon" id="openMail">
+      <img src="img/mail-icon.png" alt="Mail">
+    </button>
+
+    <button class="dock-icon" id="openInsta">
+      <img src="img/insta-icon.png" alt="Instagram">
+    </button>
+
+    <button class="dock-icon" id="openSpotify">
+      <img src="img/spot-icon.png" alt="Spotify">
+    </button>
+
+    <button class="dock-icon" id="openSteam">
+      <img src="img/steam-icon.png" alt="Steam">
+    </button>
+
+    <button class="dock-icon" id="openFiles">
+      <img src="img/file-icon.png" alt="Files">
+    </button>
+
+    <button class="dock-icon" id="openKos">
+      <img src="img/bin-icon.png" alt="Kos">
+    </button>
+  </div>
+
+
+  <!-- Připojení JavaScriptu, který řeší otevírání oken a interaktivní funkce. -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,2051 @@
+/* =====================
+   ZÁKLADNÍ NASTAVENÍ
+   ===================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(img/pozadi.png);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  min-height: 100vh;
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body.dark-mode {
+  background-image: url(img/cerne-pozadi.png);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* =====================
+   SHUTDOWN SCREEN
+   ===================== */
+
+.shutdown-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: black;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 1;
+  transition: opacity 0.45s ease;
+}
+
+.shutdown-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shutdown-text {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  animation: fadeUp 0.8s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =====================
+   TOPBAR
+   ===================== */
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 28px;
+
+  background: rgba(230, 230, 230, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 14px;
+  z-index: 9999;
+
+  color: #111;
+  font-size: 13px;
+  user-select: none;
+}
+
+body.dark-mode .topbar {
+  background: rgba(20, 20, 20, 0.55);
+  color: white;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  min-width: 40px;
+}
+
+.apple-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.apple-logo {
+  width: 13px;
+  height: 15px;
+}
+
+.topbar-center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar-right {
+  min-width: 60px;
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 500;
+}
+
+.topbar-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #111;
+  font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.topbar-btn:hover,
+.apple-btn:hover {
+  background: rgba(85, 85, 85, 0.1);
+  border-radius: 5px;
+}
+
+body.dark-mode .topbar-btn {
+  color: white;
+}
+
+body.dark-mode .topbar-btn:hover,
+body.dark-mode .apple-btn:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+
+/* =====================
+   DOCK
+   ===================== */
+
+.dock {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+
+  width: fit-content;
+  margin-bottom: 60px;
+  padding: 12px 22px;
+
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.164);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+body.dark-mode .dock {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+}
+
+.dock-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  transition: transform 0.2s ease;
+}
+
+.dock-icon:hover {
+  transform: scale(1.2) translateY(-8px);
+}
+
+.dock-icon img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+/* =====================
+   MAIL
+   ===================== */
+
+.mail-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 650px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  transition: all 0.3s ease;
+  will-change: transform, top, left;
+}
+
+body.dark-mode .mail-window {
+  background: rgba(30, 30, 30, 0.82);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.mail-window.fullscreen {
+  width: 100vw !important;
+  height: calc(100vh - 28px) !important;
+  top: 28px !important;
+  left: 0 !important;
+  transform: translate(0, 0) !important;
+  border-radius: 0;
+}
+
+.mail-window.dragging {
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+  transition: none;
+}
+
+.mail-header {
+  background: #f1f1f1;
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid #dcdcdc;
+  cursor: grab;
+  user-select: none;
+}
+
+.mail-header:active {
+  cursor: grabbing;
+}
+
+body.dark-mode .mail-header {
+  background: rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.traffic-lights {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.red {
+  background: #ff5f56;
+}
+
+.yellow {
+  background: #ffbd2e;
+}
+
+.green {
+  background: #27c93f;
+}
+
+.title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-grow: 1;
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+  margin-right: 40px;
+  pointer-events: none;
+}
+
+body.dark-mode .title {
+  color: rgba(255,255,255,0.75);
+}
+
+.mail-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mail-input {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.omne {
+  width: 100%;
+  height: 220px;
+  background: transparent;
+  padding: 12px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.mail-content a {
+  align-self: flex-end;
+  text-decoration: none;
+}
+
+.send-btn {
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 6px 18px;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background-color: blue;
+  transition: background .15s;
+}
+
+.send-btn:hover {
+  background: #58a9ff;
+}
+
+/* =====================
+   INSTAGRAM
+   ===================== */
+
+.instagram-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: min(420px, 92vw);
+  height: min(820px, calc(100vh - 70px));
+
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  z-index: 1000;
+  transition: all 0.3s ease;
+  will-change: transform, top, left;
+}
+
+.instagram-window.dragging {
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+  transition: none;
+}
+
+.instagram-window.fullscreen {
+  width: 100vw !important;
+  height: calc(100vh - 28px) !important;
+  top: 28px !important;
+  left: 0 !important;
+  transform: translate(0, 0) !important;
+  border-radius: 0;
+}
+
+.instagram-window.fullscreen .stories-wrap {
+  justify-content: center;
+  padding: 10px 14px;
+}
+
+.page-wrap {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.page {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  background-color: white;
+  display: none;
+  flex-direction: column;
+}
+
+.page.active {
+  display: flex;
+}
+
+.stories-wrap {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0 10px 14px;
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.story-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.story-ring {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4);
+  padding: 2.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.story-ring img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 2.5px solid white;
+  border-radius: 50%;
+}
+
+.story-avatar {
+  width: 57px;
+  height: 57px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2.5px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.story-name {
+  font-size: 11px;
+  color: #111;
+}
+
+
+.feed {
+  display: flex;
+  flex-direction: column;
+}
+
+.post {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+}
+
+.post-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.post-username {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111;
+}
+
+.post-location {
+  font-size: 11px;
+  color: #777;
+}
+
+.post-img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+}
+
+
+.post-caption {
+  margin: 1%;
+  font-size: 13px;
+  color: #111;
+  padding: 10px 14px 14px;
+  line-height: 1.4;
+}
+
+.profile-topbar {
+  background: #fff;
+  padding: 0 14px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.profile-username {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+}
+
+.profile-header {
+  padding: 16px 14px 12px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.profile-top {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 12px;
+}
+
+.pfp {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+.profile-stats {
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-num {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #111;
+}
+
+.profile-name {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 3px;
+  color: #111;
+}
+
+.profile-bio {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #111;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 2px;
+  background-color: white;
+}
+
+.grid-item {
+  width: 100%;
+  aspect-ratio: 1/1;
+  display: block;
+  object-fit: cover;
+  cursor: pointer;
+  overflow: hidden;
+  transition: opacity .15s;
+  background: linear-gradient(135deg,#667eea,#764ba2);
+}
+
+.grid-item:hover {
+  opacity: .85;
+}
+
+/* Spodní navigace v Instagram okně. */
+
+.insta-dock {
+  background-color: white;
+  padding: 12px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  border-top: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+.insta-nav-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  justify-self: center; /* vycentruje v každé polovině */
+
+  opacity: 0.55;
+  transition: opacity .15s, transform .15s, background .15s;
+}
+
+.insta-nav-btn:hover {
+  opacity: 1;
+  background: rgba(0,0,0,0.06);
+}
+
+.insta-nav-btn.active {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+.insta-nav-btn img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.profile-nav-btn img {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #111;
+}
+
+/* =====================
+   INSTAGRAM DARK MODE
+   ===================== */
+
+body.dark-mode .instagram-window {
+  background: #111;
+  color: white;
+}
+
+body.dark-mode .page,
+body.dark-mode .stories-wrap,
+body.dark-mode .post,
+body.dark-mode .profile-topbar,
+body.dark-mode .profile-header,
+body.dark-mode .grid,
+body.dark-mode .insta-dock {
+  background: #111;
+  color: white;
+}
+
+body.dark-mode .stories-wrap,
+body.dark-mode .post,
+body.dark-mode .profile-topbar,
+body.dark-mode .profile-header,
+body.dark-mode .insta-dock {
+  border-color: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .story-name,
+body.dark-mode .post-username,
+body.dark-mode .post-caption,
+body.dark-mode .profile-username,
+body.dark-mode .profile-name,
+body.dark-mode .profile-bio,
+body.dark-mode .stat-num,
+body.dark-mode .stat-label {
+  color: white;
+}
+
+body.dark-mode .post-location {
+  color: rgba(255,255,255,0.65);
+}
+
+body.dark-mode .insta-nav-btn:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .profile-nav-btn img {
+  border-color: white;
+}
+
+body.dark-mode .mail-header {
+  background: #181818;
+}
+
+body.dark-mode .title {
+  color: rgba(255,255,255,0.75);
+}
+
+.home-ig-dark {
+  display: none;
+}
+
+.dark-mode .home-ig-light {
+  display: none;
+}
+
+.dark-mode .home-ig-dark {
+  display: inline-block;
+}
+
+/* =====================
+   ZÁKLADNÍ MOBILNÍ ÚPRAVY
+   ===================== */
+
+@media (max-width: 700px) {
+  .mail-window,
+  .instagram-window {
+    width: 92vw;
+  }
+
+  .dock {
+    max-width: 92vw;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 9px 14px;
+  }
+
+  .dock-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .dock-icon img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .topbar-date {
+    display: none;
+  }
+
+  .shutdown-text {
+    font-size: 28px;
+  }
+}
+
+/* =====================
+   SPOTIFY
+   ===================== */
+.spotify-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: min(1100px, 94vw);
+  height: min(620px, calc(100vh - 70px));
+
+  background: #121212;
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  z-index: 1000;
+  transition: all 0.3s ease;
+  will-change: transform, top, left;
+}
+
+.spotify-window.dragging {
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+  transition: none;
+}
+
+.spotify-window.fullscreen {
+  width: 100vw !important;
+  height: calc(100vh - 28px) !important;
+  top: 28px !important;
+  left: 0 !important;
+  transform: translate(0, 0) !important;
+  border-radius: 0;
+}
+
+/* Společné nastavení pro okna Steam a Files. */
+.steam-window-st,
+.files-window-fl {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  max-height: calc(100vh - 70px);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.steam-window-st.dragging,
+.files-window-fl.dragging {
+  box-shadow: 0 28px 80px rgba(0,0,0,0.45);
+  transition: none;
+}
+
+.steam-window-st.fullscreen,
+.files-window-fl.fullscreen {
+  width: 100vw !important;
+  height: calc(100vh - 28px) !important;
+  top: 28px !important;
+  left: 0 !important;
+  transform: translate(0, 0) !important;
+  border-radius: 0;
+}
+ 
+ 
+/* Rozdělení Spotify okna na sidebar a hlavní obsah. */
+.window-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+ 
+/* Levý panel Spotify s interprety. */
+.sidebar {
+  width: 220px;
+  background: #0a0a0a;
+  border-right: 1px solid #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.sidebar::-webkit-scrollbar { display: none; }
+ 
+ 
+.spotify-dock {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.spotify-dock-icon {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  color: #b3b3b3;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: color .15s;
+  text-decoration: none;
+}
+.spotify-dock-icon:hover { color: #fff; }
+.spotify-dock-icon.active { color: #fff; border-left: 2px solid #1db954; }
+.spotify-dock-icon svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* Nadpis seznamu interpretů. */
+.section-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #535353;
+  padding: 16px 16px 8px;
+}
+ 
+.artist-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background .15s;
+}
+.artist-item:hover { background: #1a1a1a; }
+ 
+.artist-av {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.artist-name { font-size: 13px; color: #b3b3b3; }
+.artist-item:hover .artist-name { color: #fff; }
+ 
+/* Hlavní část Spotify se seznamem skladeb. */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  background: #121212;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+.main-content::-webkit-scrollbar { width: 4px; }
+.main-content::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+ 
+.main-inner { padding: 28px 24px 24px; }
+ 
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 7%;
+}
+.page-sub {
+  font-size: 13px;
+  color: #b3b3b3;
+  margin-bottom: 24px;
+}
+
+ 
+/* Seznam skladeb a jeho řádky. */
+.track-header {
+  display: grid;
+  grid-template-columns: 32px 1fr 160px 56px;
+  gap: 8px;
+  align-items: center;
+  padding: 0 8px 10px;
+  border-bottom: 1px solid #2a2a2a;
+  margin-bottom: 4px;
+}
+.track-header span {
+  font-size: 11px;
+  color: #535353;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+}
+.track-header .th-right { text-align: right; }
+ 
+.track-row {
+  display: grid;
+  grid-template-columns: 32px 1fr 160px 56px;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .12s;
+}
+.track-row:hover { background: #1a1a1a; }
+.track-row.playing .track-title { color: #1db954; }
+.track-row.playing .track-num { color: #1db954; }
+ 
+.track-num {
+  font-size: 14px;
+  color: #535353;
+  text-align: center;
+}
+.track-info { display: flex; align-items: center; gap: 12px; }
+.track-cover {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.track-title { font-size: 14px; color: #fff; font-weight: 500; }
+.track-artist-name { font-size: 12px; color: #b3b3b3; margin-top: 2px; }
+.track-art { font-size: 13px; color: #b3b3b3; }
+.track-row:hover .track-art { color: #fff; }
+.track-dur { font-size: 13px; color: #535353; text-align: right; }
+ 
+/* Spodní přehrávač Spotify. */
+.player {
+  height: 76px;
+  background: #0a0a0a;
+  border-top: 1px solid #2a2a2a;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  flex-shrink: 0;
+}
+ 
+.now-playing {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 220px;
+  flex-shrink: 0;
+}
+.now-cover {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.now-cover img,
+.track-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.now-title { font-size: 13px; color: #fff; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.now-artist { font-size: 11px; color: #b3b3b3; }
+ 
+/* Ovládání přehrávače. */
+.player-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 8px;
+}
+.ctrl-buttons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.ctrl-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #b3b3b3;
+  display: flex;
+  align-items: center;
+  transition: color .15s;
+  padding: 0;
+}
+.ctrl-btn:hover { color: #fff; }
+.ctrl-btn svg { width: 18px; height: 18px; fill: currentColor; }
+ 
+/* Ukazatel průběhu skladby. */
+.progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+.prog-time { font-size: 11px; color: #535353; width: 32px; }
+.prog-time.right { text-align: right; }
+.prog-bar {
+  flex: 1;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+.prog-fill {
+  height: 100%;
+  background: #b3b3b3;
+  border-radius: 2px;
+  transition: width .3s linear;
+}
+.prog-bar:hover .prog-fill { background: #1db954; }
+ 
+/* Vizuální ovládání hlasitosti. */
+.volume-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 130px;
+  flex-shrink: 0;
+}
+.volume-wrap svg { width: 16px; height: 16px; fill: #b3b3b3; flex-shrink: 0; }
+.vol-bar {
+  flex: 1;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.vol-fill {
+  height: 100%;
+  width: 70%;
+  background: #b3b3b3;
+  border-radius: 2px;
+}
+.vol-bar:hover .vol-fill { background: #1db954; }
+
+
+.youtube-btn {
+  width: 65px;
+  height: 65px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: #ffffff;
+  color: #111;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+
+  transition: all .25s ease;
+}
+
+.youtube-btn:hover {
+  background: #ff0000;
+  color: white;
+  transform: scale(1.08);
+}
+
+.youtube-btn:active {
+  transform: scale(0.95);
+}
+
+/* =====================
+   STEAM
+   ===================== */ 
+
+/* Hlavní vzhled okna. */
+.steam-window-st {
+  width: 820px;
+  height: 520px;
+  background: #000515;
+  border-radius: 14px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+ 
+
+ 
+/* Přepínání mezi oblíbenými hrami a profilem. */
+.tabs-st {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 6px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.tab-st {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #66a6d4;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.tab-st:hover { color: #fff; }
+.tab-st.active {
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 2px solid #66c0f4;
+}
+ 
+/* Zobrazuje se jen aktivní stránka. */
+.page-st { display: none; flex: 1; overflow: hidden; }
+.page-st.active { display: flex; }
+ 
+/* Část Steam okna s oblíbenými hrami. */
+.games-page-st {
+  flex: 1;
+  padding: 24px 28px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #2a475e #1a2744;
+}
+.games-page-st::-webkit-scrollbar { width: 4px; }
+.games-page-st::-webkit-scrollbar-thumb { background: #2a475e; border-radius: 2px; }
+ 
+.games-grid-st {
+  display: flex;
+  gap: 12px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #2a475e transparent;
+}
+.games-grid-st::-webkit-scrollbar { height: 4px; }
+.games-grid-st::-webkit-scrollbar-thumb { background: #2a475e; border-radius: 2px; }
+ 
+.game-card-st {
+  flex-shrink: 0;
+  width: 120px;
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color .15s, transform .15s;
+  position: relative;
+}
+.game-card-st:hover { border-color: #66c0f4; transform: translateY(-3px); }
+.game-card-st.active { border-color: #66c0f4; }
+ 
+.game-cover-st {
+  width: 120px;
+  height: 170px;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  background: #0f2744;
+}
+ 
+.game-title-st {
+  background: rgba(10,20,40,0.9);
+  padding: 5px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #c7d5e0;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+ 
+/* Detail vybrané hry pod kartami. */
+.game-info-st {
+  margin-top: 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.game-info-left-st { display: flex; flex-direction: column; gap: 4px; }
+.game-info-name-st { font-size: 16px; font-weight: 700; color: #fff; }
+.game-info-tags-st { display: flex; gap: 5px; }
+.game-info-tag-st {
+  padding: 2px 7px; font-size: 10px; font-weight: 600;
+  border-radius: 3px; background: rgba(255,255,255,0.08); color: #8ba3b8;
+}
+.game-info-right-st { display: flex; gap: 20px; }
+.game-stat-st { text-align: center; }
+.game-stat-n-st { font-size: 18px; font-weight: 700; color: #c7d5e0; }
+.game-stat-l-st { font-size: 10px; color: #4a6b8a; text-transform: uppercase; letter-spacing: .5px; }
+ 
+/* Profil ve Steam okně. */
+.profile-page-st {
+  flex: 1;
+  padding: 20px 28px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: #2a475e #1a2744;
+}
+.profile-page-st::-webkit-scrollbar { width: 4px; }
+.profile-page-st::-webkit-scrollbar-thumb { background: #2a475e; border-radius: 2px; }
+ 
+/* Hlavní karta profilu. */
+.profile-card-st {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.profile-avatar-st {
+  width: 80px;
+  height: 80px;
+  background: #2a475e;
+  border: 2px solid #4a7090;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  overflow: hidden;
+}
+.profile-info-st { flex: 1; }
+.profile-display-name-st { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.profile-country-st { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #8ba3b8; margin-bottom: 6px; }
+.profile-offline-st { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #606060; }
+.offline-dot-st { width: 8px; height: 8px; border-radius: 50%; background: #606060; flex-shrink: 0; }
+ 
+.profile-level-st {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 4px;
+}
+.level-circle-st {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid #e7cd3c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 900;
+  color: #fff;
+  flex-shrink: 0;
+  background: rgba(231, 214, 60, 0.15);
+}
+ 
+/* Statistiky profilu. */
+.profile-stats-row-st {
+  display: flex;
+  gap: 10px;
+}
+.profile-stat-box-st {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.psb-num-st   { font-size: 22px; font-weight: 700; color: #c7d5e0; }
+.psb-label-st { font-size: 10px; color: #4a6b8a; text-transform: uppercase; letter-spacing: .8px; }
+
+/* =====================
+   FILES
+   ===================== */
+
+/* Hlavní vzhled okna. */
+.files-window-fl {
+  width: 860px;
+  height: 580px;
+  background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+  border: 0.5px solid #333;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+ 
+/* Navigace zpět a cesta ve Files okně. */
+.back-btn-fl {
+  background: none;
+  border: none;
+  padding: 3px 7px;
+  border-radius: 5px;
+  color: #888;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  font-size: 16px;
+  margin-left: 6px;
+  transition: background .12s;
+}
+.back-btn-fl:hover { background: #333; color: #ccc; }
+
+ 
+.breadcrumb-fl {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: #555;
+  margin-left: 4px;
+}
+.breadcrumb-fl span { color: #888; }
+.breadcrumb-fl span.current { color: #ccc; font-weight: 500; }
+
+ 
+/* Tělo Files okna. */
+.window-body-fl { display: flex; flex: 1; overflow: hidden; }
+ 
+/* Levé menu ve Files. */
+.sidebar-fl {
+  width: 165px;
+  background: #1a1a1a;
+  border-right: 0.5px solid #333;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  flex-shrink: 0;
+}
+.sidebar-title-fl {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #555;
+  padding: 4px 14px 8px;
+}
+.sidebar-item-fl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 1px 5px;
+  font-size: 12px;
+  color: #888;
+  transition: background .1s, color .1s;
+}
+.sidebar-item-fl:hover { background: #2d2d2d; color: #ccc; }
+.sidebar-item-fl.active { background: #2d2d2d; color: #ccc; }
+.sidebar-item-fl svg { width: 15px; height: 15px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+ 
+/* Hlavní obsah Files okna. */
+.main-fl {
+  flex: 1;
+  overflow-y: auto;
+  background: #1e1e1e;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+.main-fl::-webkit-scrollbar { width: 4px; }
+.main-fl::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+ 
+/* Přehled složek ve Files. */
+.view-folders-fl {
+  padding: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.folder-card-fl {
+  background: #252525;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: border-color .15s, transform .12s;
+}
+.folder-card-fl:hover { border-color: #555; transform: translateY(-2px); }
+ 
+.folder-header-fl {
+  object-fit: cover;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  border-bottom: 0.5px solid #333;
+  position: relative;
+}
+ 
+.folder-info-fl { padding: 10px 12px; }
+.folder-name-fl { font-size: 13px; font-weight: 600; color: #ccc; margin-bottom: 3px; }
+.folder-desc-fl { font-size: 11px; color: #666; margin-bottom: 5px; }
+.folder-meta-fl { font-size: 10px; color: #444; display: flex; gap: 12px; }
+ 
+/* Mřížka fotek ve Files. */
+.view-photos-fl {
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.photo-card-fl {
+  background: #252525;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: border-color .15s, transform .12s;
+}
+.photo-card-fl:hover { border-color: #555; transform: translateY(-2px); }
+ 
+.photo-img-fl {
+  object-fit: cover;
+  width: 100%;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a1a;
+  overflow: hidden;
+}
+ 
+.photo-info-fl { padding: 7px 9px 8px; }
+.photo-desc-fl { font-size: 13px; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.photo-date-fl { font-size: 12px; color: #ffffff; margin-top: 2px; }
+
+.dobra-otazka-fl {
+  text-align: center;
+  font-size: 14px;
+  color: #ccc;
+  padding: 12px 16px;
+  border-top: 0.5px solid #333;
+  border-bottom: 0.5px solid #333;
+  margin: 16px 0;
+}
+ 
+
+/* =====================
+   MODAL PRO FOTKY
+   ===================== */
+.photo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.9);
+  z-index: 20000;
+  cursor: zoom-out;
+  padding: 24px;
+}
+
+.photo-modal-img {
+  max-width: 95vw;
+  max-height: 95vh;
+  width: auto;
+  height: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  border-radius: 8px;
+  display: block;
+}
+
+.photo-modal-caption {
+  margin-top: 12px;
+  color: rgba(255,255,255,0.9);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* =====================
+   KOŠ ŠPATNÝCH NÁPADŮ
+   ===================== */
+
+.kos-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: min(520px, 92vw);
+  height: min(560px, calc(100vh - 70px));
+
+  background: rgba(18, 18, 18, 0.94);
+  color: white;
+
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  z-index: 1000;
+  transition: all 0.3s ease;
+  will-change: transform, top, left;
+}
+
+.kos-window.dragging {
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+  transition: none;
+}
+
+.kos-window.fullscreen {
+  width: 100vw !important;
+  height: calc(100vh - 28px) !important;
+  top: 28px !important;
+  left: 0 !important;
+  transform: translate(0, 0) !important;
+  border-radius: 0;
+}
+
+.kos-window .mail-header {
+  flex-shrink: 0;
+}
+
+.kos-body {
+  flex: 1;
+  overflow-y: auto;
+  background: rgba(10, 10, 10, 0.96);
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+.kos-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.kos-body::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 2px;
+}
+
+.kos-motto-section {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  padding: 28px 24px 18px;
+  text-align: center;
+}
+
+.kos-motto-text {
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.kos-motto-text em {
+  font-style: normal;
+}
+
+.kos-scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+
+  animation: bob 2.2s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); opacity: .55; }
+  50% { transform: translateY(5px); opacity: 1; }
+}
+
+.kos-scroll-hint svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kos-klauzury-section {
+  padding: 0 18px 22px;
+}
+
+.kos-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.kos-klauzura-card {
+  width: 100%;
+  max-width: 230px;
+  margin: 0 auto;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+
+  overflow: hidden;
+  cursor: pointer;
+
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.kos-klauzura-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.kos-klauzura-img {
+  width: 100%;
+  height: 150px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+.kos-klauzura-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.kos-klauzura-info {
+  padding: 10px 12px 12px;
+}
+
+.kos-klauzura-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+}
+
+@media (max-width: 700px) {
+  .kos-window {
+    width: 92vw;
+    height: min(520px, calc(100vh - 70px));
+  }
+
+  .kos-motto-section {
+    min-height: 220px;
+  }
+
+  .kos-motto-text {
+    font-size: 20px;
+  }
+}
+
+
+/* =====================
+   RESPONZIVNÍ LAYOUT
+   ===================== */
+
+/* Tablet: okna se přepnou na fullscreen a některé části se zmenší. */
+@media (max-width: 900px) {
+
+  /* Všechna okna → fullscreen pod topbarem */
+  .mail-window,
+  .instagram-window,
+  .spotify-window,
+  .kos-window {
+    width: 100vw !important;
+    height: calc(100vh - 28px) !important;
+    top: 28px !important;
+    left: 0 !important;
+    transform: none !important;
+    border-radius: 0 !important;
+    max-height: none !important;
+  }
+
+  .steam-window-st,
+  .files-window-fl {
+    width: 100vw !important;
+    height: calc(100vh - 28px) !important;
+    top: 28px !important;
+    left: 0 !important;
+    transform: none !important;
+    border-radius: 0 !important;
+    max-height: none !important;
+  }
+
+  /* Zakázat cursor grab na hlavičkách — na tabletu nepotřebné */
+  .mail-header {
+    cursor: default !important;
+  }
+
+  .dock {
+    gap: 10px;
+    padding: 10px 16px;
+    margin-bottom: 12px;
+  }
+
+  .dock-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .dock-icon img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .sidebar {
+    width: 52px;
+    overflow: hidden;
+  }
+
+  .spotify-dock-icon {
+    justify-content: center;
+    padding: 10px 0;
+    gap: 0;
+    border-left: none !important;
+  }
+  .spotify-dock-icon.active {
+    border-left: none !important;
+    border-bottom: 2px solid #1db954;
+  }
+
+  .artist-item {
+    justify-content: center;
+    padding: 6px 0;
+    gap: 0;
+  }
+  .artist-name {
+    display: none;
+  }
+  .artist-av {
+    width: 32px;
+    height: 32px;
+    font-size: 11px;
+  }
+
+  .section-title {
+    display: none;
+  }
+
+  .track-art,
+  .track-dur {
+    display: none;
+  }
+
+  .track-row,
+  .track-header {
+    grid-template-columns: 28px 1fr;
+  }
+
+  .track-header span:nth-child(3),
+  .track-header span:nth-child(4) {
+    display: none;
+  }
+
+  .volume-wrap {
+    display: none;
+  }
+
+  .now-playing {
+    width: 140px;
+  }
+
+  .steam-window-st {
+    height: calc(100vh - 28px) !important;
+  }
+
+  .files-window-fl {
+    height: calc(100vh - 28px) !important;
+  }
+}
+
+/* Mobil: ještě menší layout, aby se web dal ovládat prstem. */
+@media (max-width: 480px) {
+
+  .dock {
+    gap: 7px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    overflow-x: auto;
+    max-width: 96vw;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dock-icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+  }
+
+  .dock-icon img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .dock-icon:hover {
+    transform: none;
+  }
+
+  .omne {
+    font-size: 13px;
+    height: auto;
+    min-height: 160px;
+  }
+
+  .sidebar {
+    width: 52px;
+    overflow: hidden;
+  }
+
+  .spotify-dock-icon {
+    justify-content: center;
+    padding: 10px 0;
+    gap: 0;
+    border-left: none !important;
+  }
+  .spotify-dock-icon.active {
+    border-left: none !important;
+    border-bottom: 2px solid #1db954;
+  }
+
+  .artist-item {
+    justify-content: center;
+    padding: 6px 0;
+    gap: 0;
+  }
+  .artist-name {
+    display: none;
+  }
+  .artist-av {
+    width: 32px;
+    height: 32px;
+    font-size: 11px;
+  }
+
+  .section-title {
+    display: none;
+  }
+
+  .track-art,
+  .track-dur {
+    display: none;
+  }
+
+  .track-row,
+  .track-header {
+    grid-template-columns: 28px 1fr;
+  }
+
+  .track-header span:nth-child(3),
+  .track-header span:nth-child(4) {
+    display: none;
+  }
+
+  .volume-wrap {
+    display: none;
+  }
+
+  .now-playing {
+    width: 140px;
+  }
+
+  .tab-st {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .game-info-st {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .game-info-right-st {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .view-folders-fl {
+    grid-template-columns: 1fr 1fr;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .view-photos-fl {
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .kos-motto-text {
+    font-size: 18px;
+  }
+
+  .kos-motto-section {
+    min-height: 180px;
+  }
+
+  .instagram-window {
+    height: calc(100vh - 28px) !important;
+  }
+
+  .topbar-date {
+    display: none;
+  }
+}
